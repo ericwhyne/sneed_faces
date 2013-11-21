@@ -1,0 +1,63 @@
+#!/usr/bin/python
+# found snippet here: http://www.lucaamore.com/?p=638
+
+import cv
+import time
+import Image
+import os
+from sys import argv
+
+boxScale=.1
+
+min_size = (20,20)
+image_scale = 2
+haar_scale = 1.1
+min_neighbors = 3
+haar_flags = 0
+
+infilename = argv[1]
+fname,ext=os.path.splitext(infilename)
+faceCascade = cv.Load("haarcascades/haarcascade_mcs_mouth.xml")
+
+pil_image = Image.open(infilename)
+cv_image = cv.CreateImageHeader(pil_image.size, cv.IPL_DEPTH_8U, 3)
+cv.SetData(cv_image, pil_image.tostring())
+ 
+
+# Allocate the temporary images
+grayscale = cv.CreateImage((cv_image.width, cv_image.height), 8, 1)
+smallImage = cv.CreateImage(
+  (
+    cv.Round(cv_image.width / image_scale),
+    cv.Round(cv_image.height / image_scale)
+  ), 8 ,1)
+# Convert color input image to grayscale
+cv.CvtColor(cv_image, grayscale, cv.CV_BGR2GRAY)
+
+# Equalize the histogram
+cv.EqualizeHist(grayscale, grayscale)
+
+# Detect the faces
+faces = cv.HaarDetectObjects(
+  grayscale, faceCascade, cv.CreateMemStorage(0),
+  haar_scale, min_neighbors, haar_flags, min_size
+)
+
+# If faces are found
+if faces:
+  for ((x, y, w, h), n) in faces:
+    # the input to cv.HaarDetectObjects was resized, so scale the
+    # bounding box of each face and convert it to two CvPoints
+    pt1 = (int(x * image_scale), int(y * image_scale))
+    pt2 = (int((x + w) * image_scale), int((y + h) * image_scale))
+    cv.Rectangle(cv_image, pt1, pt2, cv.RGB(255, 0, 0), 5, 8, 0)
+
+ 
+while (cv.WaitKey(15)==-1):
+  cv.ShowImage("face detection test", cv_image)
+ 
+
+
+
+
+
