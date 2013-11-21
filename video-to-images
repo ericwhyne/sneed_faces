@@ -1,0 +1,4 @@
+#!/bin/bash
+# convert a video into a series of images
+mkdir tmp/video_images
+ffmpeg -i $1 -r 1 -f image2 tmp/video_images/%05d.png
