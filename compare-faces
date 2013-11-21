@@ -1,0 +1,2 @@
+#!/bin/bash
+br -algorithm FaceRecognition -compare $1 $2 2> /dev/null

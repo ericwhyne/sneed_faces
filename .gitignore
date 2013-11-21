@@ -1,6 +1,9 @@
 tmp
 dep/*.bz2
+dep/tmp/
+dep/build/
 dep/ffmpeg-2.1.1/
 dep/openbr/
 dep/x264-snapshot-201*
-
+dep/opencv-2.4.7/
+dep/opencv-2.4.7.tar.gz

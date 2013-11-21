@@ -1,1 +1,8 @@
+# required for exractfaces
 sudo apt-get install python-opencv
+
+# required for openbr
+sudo apt-get install qt5-default libqt5svg5-dev qtcreator
+
+# ubuntu shortcut (doesn't work yet)
+# sudo apt-get install libopencv-dev
