@@ -1,1 +1,6 @@
 tmp
+dep/*.bz2
+dep/ffmpeg-2.1.1/
+dep/openbr/
+dep/x264-snapshot-201*
+
