@@ -1,0 +1,12 @@
+#!/bin/bash
+br -algorithm GenderEstimation -enroll $1 tmp/metadata.csv 2> /dev/null
+openbr_gender=`awk -F'^|,|$' '{print $18}' tmp/metadata.csv | tail -n 1`
+#echo $openbr_gender
+#Reverse gender to get correct result for our data.
+if [ $openbr_gender == 'Male' ] 
+then
+  echo "Female"
+else
+  echo "Male"
+fi
+

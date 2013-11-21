@@ -1,0 +1,4 @@
+#!/bin/bash
+br -algorithm AgeEstimation -enroll $1 tmp/metadata.csv 2> /dev/null
+awk -F'^|,|$' '{print $6}' tmp/metadata.csv | tail -n 1
+
