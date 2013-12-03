@@ -1,6 +1,5 @@
 sneed_faces
 ===========
 
-Sneed's ability to recognize faces.
-
+Basic tools for face extraction, comparison, and generating metadata wrapped in hadoop-streaming compatible scripts.
 
